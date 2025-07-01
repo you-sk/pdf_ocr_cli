@@ -6,10 +6,10 @@ import os
 
 class TestPdfOcrCli(unittest.TestCase):
 
-    # All paths are relative to the container's /app directory
-    TEST_JP_PDF = "test_jp.pdf"
-    TEST_EN_PDF = "test_en.pdf"
-    OUTPUT_JSON = "test_output.json"
+    # All paths are relative to the container's /data directory for test PDFs
+    TEST_JP_PDF = "/data/test_jp.pdf"
+    TEST_EN_PDF = "/data/test_en.pdf"
+    OUTPUT_JSON = "/data/test_output.json"
 
     def tearDown(self):
         """Clean up generated files after each test."""
