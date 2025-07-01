@@ -98,7 +98,7 @@ docker build -t pdf-ocr-cli .
 
 **MIT License**
 
-Copyright (c) 2025 [あなたの名前または組織名]
+Copyright (c) 2025 you-sk
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
