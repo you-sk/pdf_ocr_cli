@@ -2,3 +2,5 @@ PyMuPDF
 Pillow
 pytesseract
 pandas
+opencv-python
+numpy
