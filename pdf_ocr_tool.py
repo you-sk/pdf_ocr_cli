@@ -42,22 +42,22 @@ def ocr_pdf(pdf_path: Path, lang: str, dpi: int, psm: int):
         # 3. Binarization (Otsu's) - Invert the image for line detection
         binary = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
 
-        # 4. Line removal
+        # 4. Line removal - further adjusted for test PDFs
         # Horizontal lines
-        horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (40, 1))
-        detected_lines = cv2.morphologyEx(binary, cv2.MORPH_OPEN, horizontal_kernel, iterations=2)
+        horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (50, 1))
+        detected_lines = cv2.morphologyEx(binary, cv2.MORPH_OPEN, horizontal_kernel, iterations=1)
         cnts = cv2.findContours(detected_lines, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         cnts = cnts[0] if len(cnts) == 2 else cnts[1]
         for c in cnts:
-            cv2.drawContours(binary, [c], -1, 0, 2)
+            cv2.drawContours(binary, [c], -1, 0, 1)
 
         # Vertical lines
-        vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 40))
-        detected_lines = cv2.morphologyEx(binary, cv2.MORPH_OPEN, vertical_kernel, iterations=2)
+        vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, 50))
+        detected_lines = cv2.morphologyEx(binary, cv2.MORPH_OPEN, vertical_kernel, iterations=1)
         cnts = cv2.findContours(detected_lines, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         cnts = cnts[0] if len(cnts) == 2 else cnts[1]
         for c in cnts:
-            cv2.drawContours(binary, [c], -1, 0, 2)
+            cv2.drawContours(binary, [c], -1, 0, 1)
         
         # Invert the image back so text is black and background is white
         binary = cv2.bitwise_not(binary)
